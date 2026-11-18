@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Techfest 2026 · IIT Bombay — The Signal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--a:#4de1ff;--bg:#05060d;--fg:#eaf2ff;--mut:#8b97b5;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{margin:0;box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--fg);font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden;cursor:none}
+@media(hover:none){body{cursor:auto}#cu,#cr{display:none}}
+#c{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,#05060dcc 100%)}
+section{height:150vh;position:relative;z-index:2}
+.in{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 7vw;pointer-events:none;will-change:opacity,transform}
+.in>*{pointer-events:none}
+.tag{font:12px 'JetBrains Mono',monospace;letter-spacing:.3em;color:var(--a);text-transform:uppercase;margin-bottom:1.2rem}
+h1{font-size:clamp(3.2rem,14vw,12rem);line-height:.88;letter-spacing:-.05em;font-weight:700;text-transform:uppercase;background:linear-gradient(100deg,#fff 20%,var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(2.2rem,6.5vw,5.5rem);line-height:.95;letter-spacing:-.04em;font-weight:700;max-width:14ch}
+h2 em{font-style:normal;color:var(--a)}
+p{color:var(--mut);max-width:44ch;margin-top:1.2rem;line-height:1.6;font-size:clamp(.95rem,1.4vw,1.15rem)}
+.sub{font-size:clamp(1rem,2vw,1.6rem);color:var(--fg);margin-top:1.4rem;letter-spacing:.02em}
+.stats{display:flex;gap:2.5rem;margin-top:2rem;flex-wrap:wrap}
+.stats b{display:block;font-size:clamp(1.8rem,4vw,3.2rem);color:var(--a);letter-spacing:-.03em}
+.stats span{font:11px 'JetBrains Mono',monospace;color:var(--mut);letter-spacing:.2em;text-transform:uppercase}
+.card{position:absolute;right:7vw;bottom:12vh;width:min(340px,80vw);padding:1.4rem;border:1px solid #ffffff22;border-radius:18px;background:#0a0d1acc;backdrop-filter:blur(14px);transition:border-color .3s}
+.card h3{font-size:1.6rem;letter-spacing:-.02em;color:var(--a)}
+.card p{margin-top:.5rem;font-size:.95rem}
+.card small{display:block;margin-top:.9rem;font:11px 'JetBrains Mono',monospace;color:var(--mut);letter-spacing:.15em}
+.btn{pointer-events:auto!important;display:inline-block;margin-top:2.2rem;align-self:flex-start;padding:1.1rem 2.2rem;border-radius:99px;border:1px solid var(--a);color:var(--fg);text-decoration:none;font-weight:600;letter-spacing:.05em;background:color-mix(in srgb,var(--a) 15%,transparent);transition:background .3s,color .3s;will-change:transform}
+.btn:hover{background:var(--a);color:#05060d}
+.hint{position:absolute;bottom:5vh;left:7vw;font:11px 'JetBrains Mono',monospace;letter-spacing:.3em;color:var(--mut);animation:pu 2s infinite}
+@keyframes pu{50%{opacity:.3;transform:translateY(6px)}}
+.hud{position:fixed;z-index:5;font:11px 'JetBrains Mono',monospace;letter-spacing:.25em;text-transform:uppercase;color:var(--mut);pointer-events:none}
+.tl{top:calc(env(safe-area-inset-top,0px) + 24px);left:7vw;color:var(--fg)}
+.tr{top:calc(env(safe-area-inset-top,0px) + 24px);right:7vw}
+#nav{position:fixed;z-index:5;right:2.2vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px}
+#nav i{width:9px;height:9px;border-radius:50%;border:1px solid var(--mut);cursor:pointer;transition:.3s;display:block}
+#nav i.on{background:var(--a);border-color:var(--a);transform:scale(1.5);box-shadow:0 0 12px var(--a)}
+#bar{position:fixed;z-index:5;left:0;bottom:0;height:3px;width:0;background:var(--a);box-shadow:0 0 14px var(--a)}
+#cu,#cr{position:fixed;z-index:9;pointer-events:none;border-radius:50%;left:0;top:0}
+#cu{width:6px;height:6px;background:var(--a);margin:-3px}
+#cr{width:38px;height:38px;margin:-19px;border:1px solid var(--a);transition:width .25s,height .25s,margin .25s,background .25s}
+#cr.h{width:70px;height:70px;margin:-35px;background:color-mix(in srgb,var(--a) 15%,transparent)}
+.hero h1{animation:rise 1.4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(60px);filter:blur(14px)}}
+@media(max-width:700px){.card{right:5vw;left:5vw;width:auto;bottom:8vh}#nav{display:none}}
+</style></head><body>
+<canvas id="c"></canvas><div class="vig"></div>
+<div id="cu"></div><div id="cr"></div><div id="bar"></div>
+<div class="hud tl">Techfest ’26 · IIT Bombay</div><div class="hud tr">Dec 2026 · Powai</div>
+<div id="nav"><i></i><i></i><i></i><i></i><i></i></div>
+
+<section><div class="in hero"><div class="tag">Asia’s largest science &amp; technology festival</div><h1>Tech<br>fest</h1><div class="sub">2026 — Tune into <span style="color:var(--a)">The Signal</span></div><div class="hint">SCROLL TO ENTER ↓</div></div></section>
+
+<section><div class="in"><div class="tag">01 / Origin</div><h2>Ideas travel faster than <em>light</em></h2><p>For decades, Techfest has been the place where students, builders and legends collide. This year we turned the festival into a signal — and you’re the receiver.</p>
+<div class="stats"><div><b data-n="100" data-s="+">0</b><span>Events</span></div><div><b data-n="30" data-s="+">0</b><span>Countries</span></div><div><b data-n="3" data-s=" days">0</b><span>Non-stop</span></div></div></div></section>
+
+<section><div class="in"><div class="tag">02 / Arenas</div><h2>Poke the <em>universe</em></h2><p>Six arenas orbit the core. Hover to scan one, tap to ignite it.</p>
+<div class="card" id="card"><h3 id="ct">Robotics</h3><p id="cd">Autonomous bots, drones and combat arenas.</p><small id="cs">HOVER AN OBJECT</small></div></div></section>
+
+<section><div class="in"><div class="tag">03 / Voices</div><h2>Minds that <em>rewired</em> tomorrow</h2><p>Guest lectures, exhibitions and workshops by the people shaping science, space and software. Fly over the data field and listen in.</p></div></section>
+
+<section><div class="in"><div class="tag">04 / Transmission</div><h2>Your frequency is <em>live</em></h2><p>Register, compete, build something strange. The signal is already broadcasting.</p><a class="btn" id="btn" href="#">Enter Techfest 2026 →</a></div></section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const T=THREE,cv=document.getElementById('c');
+const R=new T.WebGLRenderer({canvas:cv,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+const S=new T.Scene();S.background=new T.Color(0x05060d);S.fog=new T.FogExp2(0x05060d,.011);
+const C=new T.PerspectiveCamera(60,1,.1,400);
+const cols=[0x4de1ff,0xb388ff,0xff6b9d,0xffc857,0x5dffa8].map(c=>new T.Color(c));
+const mats=[],Z=[0,-45,-90,-135,-180],acc=new T.Color();
+const M=(w=true,o=1)=>{const m=new T.MeshBasicMaterial({color:cols[0],wireframe:w,transparent:true,opacity:o});mats.push(m);return m};
+
+// 0 core (morphing)
+const coreG=new T.IcosahedronGeometry(5,3),orig=coreG.attributes.position.array.slice();
+const core=new T.Mesh(coreG,M(true,.9));const inner=new T.Mesh(new T.IcosahedronGeometry(2.4,1),M(false,.35));
+S.add(core,inner);
+// 1 rings
+const rings=[4,6.2,8.4].map((r,i)=>{const m=new T.Mesh(new T.TorusGeometry(r,.05,8,90),M(false,.9));m.position.z=Z[1];m.rotation.set(i*1.1,i*.7,0);S.add(m);return m});
+const orbCore=new T.Mesh(new T.SphereGeometry(1.6,24,24),M(true,.8));orbCore.position.z=Z[1];S.add(orbCore);
+// 2 event nodes
+const orb=new T.Group();orb.position.z=Z[2];S.add(orb);
+const EV=[['Robotics','Autonomous bots, drones and combat arenas.'],['AI Lab','Hackathons for models that think, see and build.'],['Aerospace','Rockets, satellites and flight simulation.'],['Startups','Pitch your idea on the main stage.'],['Design','Product and interaction design sprints.'],['Quantum','Workshops on the next computing frontier.']];
+const geos=[new T.BoxGeometry(2.4,2.4,2.4),new T.OctahedronGeometry(1.8),new T.TetrahedronGeometry(2),new T.DodecahedronGeometry(1.7),new T.TorusGeometry(1.4,.5,10,24),new T.ConeGeometry(1.5,2.8,6)];
+const nodes=geos.map((g,i)=>{const m=new T.Mesh(g,M(true));m.add(new T.Mesh(g,M(false,.14)));const a=i/6*Math.PI*2;m.position.set(Math.cos(a)*7.5,Math.sin(a*2)*1.6,Math.sin(a)*7.5);m.userData={i,t:1,b:0};orb.add(m);return m});
+// 3 data field
+const N=17,gm=new T.InstancedMesh(new T.BoxGeometry(.9,.9,.9),M(true,.8),N*N),D=new T.Object3D();
+gm.position.set(0,-6,Z[3]);gm.frustumCulled=false;S.add(gm);
+// 4 knot
+const knot=new T.Mesh(new T.TorusKnotGeometry(3.4,.9,160,16,2,3),M(true,.9));knot.position.z=Z[4];S.add(knot);
+// particles
+const PN=2200,pp=new Float32Array(PN*3);for(let i=0;i<PN;i++){pp.set([(Math.random()-.5)*90,(Math.random()-.5)*60,30-Math.random()*250],i*3)}
+const pg=new T.BufferGeometry();pg.setAttribute('position',new T.BufferAttribute(pp,3));
+const pm=new T.PointsMaterial({size:.16,color:cols[0],transparent:true,opacity:.8,sizeAttenuation:true});S.add(new T.Points(pg,pm));
+
+// state
+const $=s=>document.querySelector(s),secs=[...document.querySelectorAll('.in')],dots=[...document.querySelectorAll('#nav i')];
+let mx=0,my=0,smx=0,smy=0,sp=0,hov=null,cx=0,cy=0,rx=0,ry=0,counted=false;
+const ray=new T.Raycaster(),ptr=new T.Vector2(),root=document.documentElement,cr=$('#cr');
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t;
+function size(){R.setSize(innerWidth,innerHeight,false);C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+function pick(){const f=sp*4;if(Math.abs(f-2)>.7){return null}ray.setFromCamera(ptr,C);const h=ray.intersectObjects(nodes,false);return h.length?h[0].object:null}
+function show(n){if(!n)return;$('#ct').textContent=EV[n.userData.i][0];$('#cd').textContent=EV[n.userData.i][1];$('#cs').textContent='TAP TO IGNITE'}
+addEventListener('pointermove',e=>{mx=e.clientX/innerWidth*2-1;my=-(e.clientY/innerHeight*2-1);ptr.set(mx,my);cx=e.clientX;cy=e.clientY;$('#cu').style.transform=`translate(${cx}px,${cy}px)`;hov=pick();cr.classList.toggle('h',!!hov||!!e.target.closest?.('.btn'));show(hov)});
+addEventListener('pointerdown',e=>{ptr.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight*2-1));const n=pick();if(n){n.userData.b=1;show(n);$('#cs').textContent='IGNITED ✦'}});
+dots.forEach((d,k)=>d.onclick=()=>scrollTo({top:k*innerHeight*1.5,behavior:'smooth'}));
+function count(){counted=true;document.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n,s=el.dataset.s,t0=performance.now();(function u(t){const k=clamp((t-t0)/1600);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(u)})(t0)})}
+const btn=$('#btn');
+
+function tick(ms){const t=ms*.001;
+ const p=clamp(scrollY/(innerHeight*6)),prev=sp;sp+=(p-sp)*.07;const vel=sp-prev;
+ const f=sp*4,i=Math.min(Math.floor(f),3),fr=f-i,e=fr*fr*(3-2*fr);
+ smx+=(mx-smx)*.05;smy+=(my-smy)*.05;
+ const zc=lerp(Z[i],Z[i+1],e)+14;
+ C.position.set(Math.sin(f*1.3)*2+smx*2.6,Math.cos(f*.9)*1.2+smy*1.6,zc);
+ C.lookAt(smx*1.6,smy,zc-14);C.rotateZ(-vel*35+smx*-.04);
+ C.fov=60+clamp(Math.abs(vel)*500,0,22);C.updateProjectionMatrix();
+ // accent
+ acc.copy(cols[i]).lerp(cols[i+1],e);mats.forEach(m=>m.color.copy(acc));pm.color.copy(acc);
+ root.style.setProperty('--a','#'+acc.getHexString());
+ // core morph
+ const pa=coreG.attributes.position;for(let k=0;k<pa.count;k++){const x=orig[k*3],y=orig[k*3+1],z=orig[k*3+2],d=1+.14*Math.sin(t*1.6+x*.9+y*.7)+.08*Math.sin(t*2.3+z*1.1);pa.setXYZ(k,x*d,y*d,z*d)}pa.needsUpdate=true;
+ core.rotation.y=t*.15+sp*6;core.rotation.x=t*.08;inner.rotation.y=-t*.6;inner.scale.setScalar(1+Math.sin(t*2)*.12);
+ rings.forEach((r,k)=>{r.rotation.x+=.004*(k+1);r.rotation.y+=.003*(3-k);r.rotation.z=sp*5*(k+1)});orbCore.rotation.y=t*.5;
+ orb.rotation.y=t*.12+sp*3;
+ nodes.forEach(n=>{const u=n.userData;n.rotation.x+=.008;n.rotation.y+=.012;u.b*=.94;const tg=(n===hov?1.35:1)+u.b*.9;u.t+=(tg-u.t)*.12;n.scale.setScalar(u.t)});
+ if(Math.abs(f-3)<1){const hh=t*1.2;for(let a=0;a<N;a++)for(let b=0;b<N;b++){const x=(a-8)*2.2,z=(b-8)*2.2,h=Math.sin(hh+x*.35)*Math.cos(hh*.8+z*.35)*2.2;D.position.set(x,h,z);D.scale.setScalar(1+h*.15);D.updateMatrix();gm.setMatrixAt(a*N+b,D.matrix)}gm.instanceMatrix.needsUpdate=true}
+ knot.rotation.x=t*.3;knot.rotation.y=t*.45;
+ // sections
+ secs.forEach((s,k)=>{const o=clamp(1-Math.abs(f-k)*2.4);s.style.opacity=o;s.style.transform=`translateY(${(k-f)*40}px) scale(${.96+.04*o})`;if(k===1&&o>.6&&!counted)count()});
+ dots.forEach((d,k)=>d.classList.toggle('on',Math.round(f)===k));
+ $('#bar').style.width=sp*100+'%';
+ // cursor ring + magnetic button
+ rx+=(cx-rx)*.18;ry+=(cy-ry)*.18;cr.style.transform=`translate(${rx}px,${ry}px)`;
+ const b=btn.getBoundingClientRect(),dx=cx-(b.left+b.width/2),dy=cy-(b.top+b.height/2),dist=Math.hypot(dx,dy);
+ btn.style.transform=dist<140?`translate(${dx*.25}px,${dy*.25}px)`:'';
+ R.render(S,C);requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+</script></body></html>
